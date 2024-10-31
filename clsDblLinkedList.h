@@ -142,6 +142,19 @@ public:
         RefreshPrevs();
         RefreshCycle();
     }
+    int Size()
+    {
+        Node *temp = head;
+        int size = 0;
+        if (temp->next == NULL)
+            return 0;
+        while (temp->next != NULL && temp->next != head)
+        {
+            size++;
+            temp = temp->next;
+        }
+        return size;
+    }
     void ListNodes()
     {
         Node *temp = head;
