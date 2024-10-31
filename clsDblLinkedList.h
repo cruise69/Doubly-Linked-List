@@ -15,7 +15,7 @@ class clsDblLinkedList
         Node(T val = T()) : value(val), next(NULL), prev(NULL){};
     };
     Node *head = new Node();
-    long long _size = 0;
+    unsigned long long _size = 0;
     void RefreshCycle() // Refresh cycle between head node and last node
     {
         if (head->next == NULL)
@@ -149,12 +149,33 @@ public:
         RefreshCycle();
         _size++;
     }
-    int Size()
+    int Size() { return _size; }
+    bool IsEmpty() { return _size == 0; }
+    void Clear()
     {
-        return _size;
+        if (_size == 0 || head->next == NULL)
+            return;
+        Node *temp = head->next;
+        while (temp->next != NULL && temp->next != head)
+        {
+            temp = temp->next;
+            delete temp->prev;
+        }
+        delete temp->next;
+        delete temp;
+        head->next = NULL;
+        head->prev = NULL;
+        _size = 0;
+        RefreshCycle();
+        RefreshPrevs();
     }
     void ListNodes()
     {
+        if (_size == 0)
+        {
+            cout << "None to Print";
+            return;
+        }
         Node *temp = head;
         while (temp->next != head && temp->next != NULL)
         {
