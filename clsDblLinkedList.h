@@ -15,6 +15,7 @@ class clsDblLinkedList
         Node(T val = T()) : value(val), next(NULL), prev(NULL){};
     };
     Node *head = new Node();
+    long long _size = 0;
     void RefreshCycle() // Refresh cycle between head node and last node
     {
         if (head->next == NULL)
@@ -69,6 +70,7 @@ public:
         toDelete = nullptr;
         RefreshCycle();
         RefreshPrevs();
+        _size--;
     }
     void DeleteLastNode()
     {
@@ -84,6 +86,7 @@ public:
         toDelete = nullptr;
         RefreshCycle();
         RefreshPrevs();
+        _size--;
     }
     void DeleteNode(T value)
     {
@@ -97,6 +100,7 @@ public:
         toDelete = nullptr;
         RefreshCycle();
         RefreshPrevs();
+        _size--;
     }
     Node *Find(T value)
     {
@@ -120,6 +124,7 @@ public:
         tempNode->prev = head;
         RefreshPrevs();
         RefreshCycle();
+        _size++;
     }
     void InsertAtTheEnd(T value)
     {
@@ -130,6 +135,7 @@ public:
         temp->prev = GetLastNode();
         RefreshPrevs();
         RefreshCycle();
+        _size++;
     }
     void InsertAfter(T prevNodeValue, T afterNodeValue)
     {
@@ -141,19 +147,11 @@ public:
         prevNode->next = afterNode;
         RefreshPrevs();
         RefreshCycle();
+        _size++;
     }
     int Size()
     {
-        Node *temp = head;
-        int size = 0;
-        if (temp->next == NULL)
-            return 0;
-        while (temp->next != NULL && temp->next != head)
-        {
-            size++;
-            temp = temp->next;
-        }
-        return size;
+        return _size;
     }
     void ListNodes()
     {
