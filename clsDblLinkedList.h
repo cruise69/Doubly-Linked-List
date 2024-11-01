@@ -188,7 +188,7 @@ public:
     {
         Node *temp = head;
         Node *empty = new Node();
-        empty->value = NULL;
+        empty->value = -1;
         if (Index > _size)
             return empty;
         for (unsigned long long i = 0; i < Index; i++)
@@ -198,7 +198,8 @@ public:
         delete empty;
         return temp;
     }
-    T GetItem(unsigned long long Index) { return GetNode(Index)->value }
+    T GetItem(unsigned long long Index) { return GetNode(Index)->value; };
+    void UpdateItem(T value, unsigned long long Index) { GetNode(Index)->value = value; }
     void ListNodes()
     {
         if (_size == 0)
