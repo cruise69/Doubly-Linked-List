@@ -169,6 +169,21 @@ public:
         RefreshCycle();
         RefreshPrevs();
     }
+    void Reverse()
+    {
+        Node *temp = GetLastNode();
+        Node *temp2 = GetLastNode();
+        head->next = temp;
+        while (temp->prev != head->next && temp->prev != NULL)
+        {
+            temp->next = temp->prev;
+            temp->prev = temp2->next;
+            temp = temp->next;
+            temp2 = temp2->prev;
+        }
+        RefreshCycle();
+        RefreshPrevs();
+    }
     void ListNodes()
     {
         if (_size == 0)
