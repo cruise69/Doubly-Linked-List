@@ -200,6 +200,20 @@ public:
     }
     T GetItem(unsigned long long Index) { return GetNode(Index)->value; };
     void UpdateItem(T value, unsigned long long Index) { GetNode(Index)->value = value; }
+    void InsertAfter(unsigned long long Index, T value, short variation)
+    {
+        if (Index > _size)
+            return;
+        Node *prevNode = GetNode(Index);
+        Node *afterNode = new Node();
+        afterNode->value = value;
+        afterNode->next = prevNode->next;
+        afterNode->prev = prevNode;
+        prevNode->next = afterNode;
+        RefreshPrevs();
+        RefreshCycle();
+        _size++;
+    }
     void ListNodes()
     {
         if (_size == 0)
