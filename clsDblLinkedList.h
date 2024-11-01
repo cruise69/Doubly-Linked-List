@@ -184,6 +184,20 @@ public:
         RefreshCycle();
         RefreshPrevs();
     }
+    Node *GetNode(unsigned long long Index)
+    {
+        Node *temp = head;
+        Node *empty = new Node();
+        empty->value = -1;
+        if (Index > _size)
+            return empty;
+        for (unsigned long long i = 0; i < Index; i++)
+        {
+            temp = temp->next;
+        }
+        delete empty;
+        return temp;
+    }
     void ListNodes()
     {
         if (_size == 0)
